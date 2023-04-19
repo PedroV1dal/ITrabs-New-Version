@@ -1,7 +1,7 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx,png}",
   ],
   theme: {
     extend: {
@@ -10,6 +10,12 @@ export default {
         EsmeraldGreen: '#00856F',
         Purple: '#6E0085',
         White: '#FFFFFF',
+      },
+      width: {
+        600: '37.5rem',
+      },
+      fontFamily: {
+        montserrat: ['Montserrat', 'sans-serif'],
       },
     },
   },
