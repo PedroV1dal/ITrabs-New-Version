@@ -2,7 +2,7 @@ import React from 'react'
 import { HomeBtn } from './HomeBtn'
 import { Link } from 'react-router-dom'
 
-export const MainHeader = () => {
+export const HomeHeader = () => {
   return (
     <header className="header flex justify-center items-center fixed top-0 w-screen pb-10">
       <div className="container max-w-7xl">
