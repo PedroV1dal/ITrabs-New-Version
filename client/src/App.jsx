@@ -4,6 +4,7 @@ import { PerfilProfissional } from "./assets/pages/PerfilProfissional"
 import { PerfilContratante } from "./assets/pages/PerfilContratante"
 import { Register } from "./assets/pages/Register"
 import { Routes, Route } from "react-router-dom"
+import { EncontrarProfissionais } from "./assets/pages/EncontrarProfissionais"
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/perfilprofissional" element={<PerfilProfissional />} />
       <Route path="/perfilcontratante" element={<PerfilContratante />} />
+      <Route path="/encontrarprofissionais" element={<EncontrarProfissionais />} />
     </Routes>
   )
 }
