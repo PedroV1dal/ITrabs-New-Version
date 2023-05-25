@@ -23,9 +23,14 @@ docker-compose up -d
 ## Executando o Projeto
 
 1. Certifique-se de que o banco de dados Docker esteja em execução.
-2. Execute o seguinte comando para iniciar o servidor de desenvolvimento do Django:
+2. Execute os seguinte comandos para aplicar as migrações do banco de dados:
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+3. Execute o seguinte comando para iniciar o servidor de desenvolvimento do Django:
 ```
 python manage.py runserver
 ```
-3. O servidor estará disponível em http://localhost:8000.
+4. O servidor estará disponível em http://localhost:8000.
 
