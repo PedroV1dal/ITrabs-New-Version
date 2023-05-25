@@ -1,0 +1,10 @@
+# Ignorar a pasta "data" do MySQL
+data/
+
+# Ignorar arquivos e diretórios gerados automaticamente
+*.pyc
+__pycache__/
+*.sqlite3
+
+# Ignorar a pasta "migrations"
+**/migrations/

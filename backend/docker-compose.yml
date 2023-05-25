@@ -1,0 +1,14 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql_container
+    environment:
+      - MYSQL_ROOT_PASSWORD=owo
+      - MYSQL_USER=obina
+      - MYSQL_PASSWORD=uwu
+      - MYSQL_DATABASE=itrabs
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
