@@ -41,6 +41,12 @@ class UserRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
         return self.request.user
 
 
+class UserDeleteAPIView(generics.DestroyAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+
 class UserRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer

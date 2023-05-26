@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from django.db import models
 from multiselectfield import MultiSelectField
 
+
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -16,6 +17,7 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(email, password, **extra_fields)
+
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     STATUS_CHOICES = (
@@ -46,23 +48,35 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ('GBP', 'GBP'),
     )
 
+    name = models.CharField('Name', max_length=300, blank=True)
     email = models.EmailField(unique=True)
-    phone_number = models.CharField('Phone number', max_length=16, default='(0) 0 0000-0000')
-    status = models.CharField(choices=STATUS_CHOICES, max_length=10, default='standard')
+    phone_number = models.CharField(
+        'Phone number', max_length=16, default='(0) 0 0000-0000')
+    status = models.CharField(choices=STATUS_CHOICES,
+                              max_length=10, default='standard')
     about_general = models.TextField('About me', max_length=300, blank=True)
     about_looking = models.TextField('Looking for', max_length=300, blank=True)
-    about_expectation = models.TextField('What I expect', max_length=300, blank=True)
+    about_expectation = models.TextField(
+        'What I expect', max_length=300, blank=True)
 
     occupation = models.CharField('Occupation', max_length=50, blank=True)
-    professional_history = models.TextField('Professional history', max_length=300, blank=True)
-    about_professional = models.TextField('About my career', max_length=300, blank=True)
-    about_advertisement = models.TextField('Descrição do Anúncio:', max_length=300, blank=True)
-    category = models.CharField('Categoria', choices=CATEGORY_CHOICES, max_length=30, default='Não especificado')
-    availability = models.TextField('Disponibilidade', max_length=70, blank=True)
-    currency =  models.CharField('Moeda', max_length=3, choices=CURRENCY_CHOICES, default='BRL')
-    currency_amount = models.DecimalField('Preço por hora', max_digits=10, decimal_places=2, default=0)
+    professional_history = models.TextField(
+        'Professional history', max_length=300, blank=True)
+    about_professional = models.TextField(
+        'About my career', max_length=300, blank=True)
+    about_advertisement = models.TextField(
+        'Descrição do Anúncio:', max_length=300, blank=True)
+    category = models.CharField(
+        'Categoria', choices=CATEGORY_CHOICES, max_length=30, default='Não especificado')
+    availability = models.TextField(
+        'Disponibilidade', max_length=70, blank=True)
+    currency = models.CharField(
+        'Moeda', max_length=3, choices=CURRENCY_CHOICES, default='BRL')
+    currency_amount = models.DecimalField(
+        'Preço por hora', max_digits=10, decimal_places=2, default=0)
 
-    languages = MultiSelectField('Idiomas', max_length=30, choices=LANGUAGE_CHOICES, default='Português')
+    languages = MultiSelectField(
+        'Idiomas', max_length=30, choices=LANGUAGE_CHOICES, default='Português')
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -71,7 +85,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-
 
     groups = models.ManyToManyField(
         'auth.Group',
