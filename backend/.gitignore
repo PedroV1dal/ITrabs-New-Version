@@ -5,6 +5,3 @@ data/
 *.pyc
 __pycache__/
 *.sqlite3
-
-# Ignorar a pasta "migrations"
-**/migrations/
