@@ -3,22 +3,27 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 export const Login = () => {
+
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-    const data = { email, password };
+    // Criar um objeto de dados com as credenciais de login
+    const loginData = {
+      email: email,
+      password: password
+    };
 
-    axios.post('/api/login/', data)
+    // Enviar solicitação POST para a API do Django
+    axios.get('users/', loginData)
       .then(response => {
-        // Processar a resposta do backend, como salvar o token de autenticação
-        // ou redirecionar para a página de perfil
+        // Manipular a resposta da API, se necessário
         console.log(response.data);
       })
       .catch(error => {
-        // Lidar com erros, como exibir uma mensagem de erro ao usuário
+        // Lidar com erros, se necessário
         console.error(error);
       });
   };
@@ -32,15 +37,28 @@ export const Login = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Digite seu Email" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Digite seu Email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           </div>
           <div className="mb-6">
             <label htmlFor="password" className="block text-gray-700 font-bold mb-2">Senha:</label>
-            <input type="password" name="password" id="password" placeholder="Digite sua senha" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Digite sua senha"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
           </div>
           <div className="flex items-center justify-between">
-            <Link to='/perfilprofissional'><input type="submit" id="button" value="Fazer Login" className="bg-Purple hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" /></Link>
+            <input type="submit" id="button" value="Fazer Login" className="bg-Purple hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
             <Link to="/register" className="inline-block align-baseline font-bold text-sm text-Purple hover:text-blue-800">Registre-se</Link>
           </div>
         </form>
