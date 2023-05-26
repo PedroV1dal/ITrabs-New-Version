@@ -37,13 +37,15 @@ export const Login = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Digite seu Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Digite seu Email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
           </div>
           <div className="mb-6">
             <label htmlFor="password" className="block text-gray-700 font-bold mb-2">Senha:</label>

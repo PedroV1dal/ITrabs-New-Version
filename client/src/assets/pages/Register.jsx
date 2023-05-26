@@ -49,13 +49,15 @@ export const Register = () => {
             />
           </div>
           <div className="mb-6">
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Digite sua senha"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Digite sua senha"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
           </div>
 
           <button type="submit" id="button" className="bg-Purple hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Cadastrar-se</button>
