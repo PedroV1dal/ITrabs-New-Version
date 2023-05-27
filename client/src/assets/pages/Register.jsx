@@ -1,10 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { Login } from './Login';
 
 export const Register = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,12 +20,16 @@ export const Register = () => {
     };
 
     // Enviar solicitação POST para a API do Django
-    axios.post('/users/create/', userData)
+    axios.post('http://127.0.0.1:8000/users/create/', userData)
       .then(response => {
-        console.log(response.data);
+        alert('usuario criado')
+        setEmail('')
+        setPassword('')
+        navigate('/login')
+        // console.log(response.data);
       })
-      .catch(error => {
-        console.error(error);
+      .catch(() => {
+        alert('Uepa! Deu ruim amigão')
       });
   };
 
@@ -49,6 +57,7 @@ export const Register = () => {
             />
           </div>
           <div className="mb-6">
+            <label htmlFor="password" className="block text-Purple font-bold mb-2">Senha:</label>
             <input
               type="password"
               name="password"

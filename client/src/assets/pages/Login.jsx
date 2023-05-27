@@ -17,13 +17,16 @@ export const Login = () => {
     };
 
     // Enviar solicitação POST para a API do Django
-    axios.get('users/', loginData)
+    axios.post('http://127.0.0.1:8000/token/', loginData)
       .then(response => {
-        // Manipular a resposta da API, se necessário
-        console.log(response.data);
+        sessionStorage.setItem('token', response.data.access)
+        setEmail('')
+        setPassword('')
+        //console.log(response.data);
       })
       .catch(error => {
         // Lidar com erros, se necessário
+        alert('PARE! Não permitido')
         console.error(error);
       });
   };
@@ -36,6 +39,7 @@ export const Login = () => {
         <h2 className="text-2xl font-medium mb-6 text-black">Entre na sua conta</h2>
 
         <form onSubmit={handleSubmit}>
+          <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email:</label>
           <div className="mb-4">
             <input
               type="email"
