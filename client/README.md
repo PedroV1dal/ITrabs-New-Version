@@ -2,7 +2,7 @@ Este repositório contém um projeto base utilizando o React com o Vite como bun
 
 ## Pré-requisitos
 
-Antes de começar, verifique se você tem o seguinte instalado em sua máquina:
+Antes de começar, verifique se você tem instalado em sua máquina:
 
 - Node.js (versão 12 ou superior)
 - npm (geralmente é instalado junto com o Node.js)
