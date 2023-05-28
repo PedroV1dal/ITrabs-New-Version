@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 export const Login = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const token = sessionStorage.getItem('token')
+  const navigate = useNavigate();
+
+  const [userLogged, setUserLogged] = useState(token != null);
+  console.log(userLogged)
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,13 +26,15 @@ export const Login = () => {
     axios.post('http://127.0.0.1:8000/token/', loginData)
       .then(response => {
         sessionStorage.setItem('token', response.data.access)
+        alert('Bem-Vindo')
         setEmail('')
         setPassword('')
-        //console.log(response.data);
+        navigate('/perfilprofissional')
+        // console.log(response.data);
       })
       .catch(error => {
         // Lidar com erros, se necessário
-        alert('PARE! Não permitido')
+        alert('PARE! ADOBE NILSONNNNNNN ! FAÇA O L')
         console.error(error);
       });
   };

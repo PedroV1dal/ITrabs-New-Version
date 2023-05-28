@@ -1,9 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MainHeader } from '../components/MainHeader'
 import { Link } from 'react-router-dom'
 import { Star, ChatTeardropText, PencilSimple, InstagramLogo, LinkedinLogo, TwitterLogo } from '@phosphor-icons/react'
+import { AboutUser } from '../components/AboutUser'
+import { ProfissionaHistory } from '../components/ProfissionaHistory'
 
 export const PerfilProfissional = () => {
+
+  const [modoEdicao, setModoEdicao] = useState(false);
+  const [sobre, setSobre] = useState('algo sobre o user'); // Substitua pelo valor inicial real
+
+  const alternarModoEdicao = () => {
+    setModoEdicao(!modoEdicao);
+  };
+
+  const salvarSobre = () => {
+    // Lógica para salvar o novo valor de 'sobre' no backend
+    // ...
+
+    setModoEdicao(false);
+    console.log('Alterações salvas com sucesso');
+  };
+
+  const handleSobreChange = (event) => {
+    setSobre(event.target.value);
+  };
+
+
   return (
     <div>
       <MainHeader />
@@ -52,37 +75,9 @@ export const PerfilProfissional = () => {
 
               <hr className='max-w-3xl m-auto' />
 
-              <div className="about-box box max-w-3xl m-auto pt-7">
-                <span>
-                  <div className="box-label flex justify-between items-center">
-                    <h3 className='text-base text-white'>sobre</h3>
-                    <PencilSimple size={18} color='white' className='cursor-pointer' />
-                  </div>
-                </span>
-                <div className="about h-12">
-                  <p className='ml-0 mt-2 text-xs text-white font-medium'>
-                    <span>
-                      algo sobre o user
-                    </span>
-                  </p>
-                </div>
-              </div>
+              <AboutUser />
+              <ProfissionaHistory />
 
-              <div className="professional-history box max-w-3xl m-auto pt-7">
-                <span>
-                  <div className="box-label flex justify-between items-center">
-                    <h3 className='text-base text-white'>historico profissinal</h3>
-                    <PencilSimple size={18} color='white' className='cursor-pointer' />
-                  </div>
-                </span>
-                <div className="about h-12">
-                  <p className='ml-0 mt-2 text-xs text-white font-medium'>
-                    <span>
-                      trajetoria
-                    </span>
-                  </p>
-                </div>
-              </div>
             </div>
 
             <div className="right-info w-60 bg-Purple ml-6 rounded-lg">
