@@ -37,7 +37,7 @@ export const EncontrarProfissionais = () => {
                     <Star size={18} className='text-white' />
                     <Star size={18} className='text-white' />
                   </div>
-                  <p className="font-bold text-white text-xs">publicado há pipipi</p>
+                  <p className="font-bold text-white text-xs">publicado à</p>
 
                 </div>
               </div>
