@@ -5,7 +5,8 @@ from .views import (
     AdvertisementCreateAPIView,
     AdvertisementSearchAPIView,
     AdvertisementUpdateAPIView,
-    AdvertisementDeleteAPIView
+    AdvertisementDeleteAPIView,
+    AdvertisementRatingCreateAPIView
 )
 
 app_name = 'advertisements'
@@ -22,5 +23,6 @@ urlpatterns = [
     path('advertisements/<int:pk>/update/',
          AdvertisementUpdateAPIView.as_view(), name='advertisement-update'),
     path('advertisements/<int:pk>/delete/', AdvertisementDeleteAPIView.as_view(),
-         name='advertisement-delete')
+         name='advertisement-delete'),
+     path('advertisements/<int:pk>/rate/', AdvertisementRatingCreateAPIView.as_view(), name='advertisement-rate'),
 ]
