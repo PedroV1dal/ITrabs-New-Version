@@ -3,32 +3,21 @@ import { Login } from "./assets/pages/Login"
 import { PerfilProfissional } from "./assets/pages/PerfilProfissional"
 import { PerfilContratante } from "./assets/pages/PerfilContratante"
 import { Register } from "./assets/pages/Register"
-import { Routes, Route, Link } from "react-router-dom"
+import { Routes, Route, useNavigate } from "react-router-dom"
 import { EncontrarProfissionais } from "./assets/pages/EncontrarProfissionais"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
+
 
 function App() {
 
-  // const isAuthenticated = () => {
-  //   const token = sessionStorage.getItem('token');
-  //   // Verifique se o token existe e se está válido
-  //   return token !== null && token !== undefined;
-  // };
+  const authenticated = sessionStorage.getItem('token')
+  const navigate = useNavigate();
 
-  // Componente de rota protegida
-  // const ProtectedRoute = ({ element, path }) => {
-  //   return isAuthenticated() ? (
-  //     <Route path={path} element={element} />
-  //   ) : (
-  //     <Link to="/login" />
-  //   );
-  // };
-
-  // const [authenticated, setAuthenticated] = useState(false);
-
-  // useEffect(() => {
-  //   setAuthenticated(isAuthenticated());
-  // }, [authenticated]);
+  useEffect(() => {
+    if (!authenticated) {
+      navigate('/login');
+    }
+  }, [authenticated, navigate]);
 
   return (
     <Routes>
@@ -36,19 +25,12 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      {/* {authenticated && (
-        <>
-          <Route path="/perfilprofissional" element={<PerfilProfissional />} />
-          <Route path="/perfilcontratante" element={<PerfilContratante />} />
-          <Route path="/encontrarprofissionais" element={<EncontrarProfissionais />} />
-        </>
-      )} */}
+      {authenticated ? <Route path="/perfilprofissional" element={<PerfilProfissional />} /> : null}
+      {authenticated ? <Route path="/perfilcontratante" element={<PerfilContratante />} /> : null}
+      {authenticated ? <Route path="/encontrarprofissionais" element={<EncontrarProfissionais />} /> : null}
 
-      <Route path="/perfilprofissional" element={<PerfilProfissional />} />
-      <Route path="/perfilcontratante" element={<PerfilContratante />} />
-      <Route path="/encontrarprofissionais" element={<EncontrarProfissionais />} />
-    </Routes >
-  )
+    </Routes>
+  );
 }
 
 export default App

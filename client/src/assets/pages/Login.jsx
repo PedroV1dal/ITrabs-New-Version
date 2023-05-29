@@ -27,6 +27,7 @@ export const Login = () => {
       .then(response => {
         sessionStorage.setItem('token', response.data.access)
         alert('Bem-Vindo')
+        // console.log(response)
         setEmail('')
         setPassword('')
         navigate('/perfilprofissional')
