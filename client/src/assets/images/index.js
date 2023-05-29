@@ -19,6 +19,6 @@ import Instagram from './instagram.svg'
 import Linkedin from './LinkedinLogo.svg'
 
 import Logo from './Logo.png'
-import RatingStart from './Star 1.png'
+import RatingStar from './Star.png'
 
-export { anuncie, publique, venda, background, cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8, FotoSobre, Facebook, Instagram, Linkedin, Logo, RatingStart }
+export { anuncie, publique, venda, background, cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8, FotoSobre, Facebook, Instagram, Linkedin, Logo, RatingStar }
