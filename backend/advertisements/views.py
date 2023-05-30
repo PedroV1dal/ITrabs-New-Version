@@ -1,8 +1,8 @@
 from rest_framework import generics, serializers, permissions
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
-from .models import Advertisement
-from .serializers import AdvertisementSerializer
+from .models import Advertisement, Rating
+from .serializers import AdvertisementSerializer, RatingSerializer
 from django.db.models import Q
 
 
@@ -76,3 +76,19 @@ class AdvertisementDeleteAPIView(generics.DestroyAPIView):
             raise PermissionDenied(
                 "You do not have permission to delete this advertisement.")
         return obj
+
+
+class AdvertisementRatingCreateAPIView(generics.CreateAPIView):
+    serializer_class = RatingSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        advertisement_id = self.kwargs['pk']
+        advertisement = Advertisement.objects.get(pk=advertisement_id)
+
+        if Rating.objects.filter(user=user, advertisement=advertisement).exists():
+            raise serializers.ValidationError(
+                "You have already voted for this advertisement.")
+
+        serializer.save(user=user, advertisement=advertisement)
