@@ -14,12 +14,11 @@ function App() {
 
   useEffect(() => handleAuth(), [authenticated, navigate]);
 
-  const handleAuth = () => 
-  {
-    if (!authenticated && window.location.pathname !== '/register') 
+  const handleAuth = () => {
+    if (!authenticated && window.location.pathname !== '/register')
       navigate('/login');
-    else if(window.location.pathname === '/login') 
-      navigate('/');  
+    else if (window.location.pathname === '/login')
+      navigate('/');
   };
 
   return (
@@ -31,7 +30,7 @@ function App() {
       {authenticated ? <Route path="/perfilprofissional" element={<PerfilProfissional />} /> : null}
       {authenticated ? <Route path="/perfilcontratante" element={<PerfilContratante />} /> : null}
       {authenticated ? <Route path="/encontrarprofissionais" element={<EncontrarProfissionais />} /> : null}
-      
+
     </Routes>
   );
 }
