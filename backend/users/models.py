@@ -78,6 +78,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     languages = MultiSelectField(
         'Idiomas', max_length=30, choices=LANGUAGE_CHOICES, default='Português')
 
+    instagram_link = models.URLField('Instagram link', max_length=200, blank=True)
+    twitter_link = models.URLField('Twitter link', max_length=200, blank=True)
+    linkedin_link = models.URLField('LinkedIn link', max_length=200, blank=True)
+
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 

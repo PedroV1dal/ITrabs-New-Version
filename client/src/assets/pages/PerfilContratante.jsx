@@ -1,9 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { MainHeader } from '../components/MainHeader'
 import { Link } from 'react-router-dom'
 import { Star, ChatTeardropText, PencilSimple, InstagramLogo, LinkedinLogo, TwitterLogo } from '@phosphor-icons/react'
+import axios from 'axios'
 
 export const PerfilContratante = () => {
+  const [userInfo, setUserInfo] = useState(null);
+
+  useEffect(() => {
+    const authToken = sessionStorage.getItem('token');
+    
+    axios.get('http://127.0.0.1:8000/user-info/', {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    })
+      .then(response => {
+        const userData = response.data;
+        setUserInfo(userData);
+      })
+      .catch(error => {
+        console.log('erro');
+      });
+  }, []);
+
+  if (!userInfo) {
+    return <div>Carregando...</div>;
+  }
+
+
   return (
     <div>
       <MainHeader />
@@ -26,7 +51,7 @@ export const PerfilContratante = () => {
                 <div className='flex justify-between w-full pr-24 pb-6'>
                   <div className="profile-information">
                     <div className='flex items-center'>
-                      <h2 className='text-white text-3xl mt-8 ml-7'><span>nome do usuario</span></h2>
+                      <h2 className='text-white text-3xl mt-8 ml-7'><span>{userInfo.name}</span></h2>
                       <PencilSimple size={18} color='white' className='cursor-pointer mt-8 ml-5' />
                     </div>
                     <div className="rating ml-7 mt-2 flex">
@@ -58,7 +83,7 @@ export const PerfilContratante = () => {
                 <div className="about h-12">
                   <p className='ml-0 mt-2 text-xs text-white font-medium'>
                     <span>
-                      algo sobre o user
+                      {userInfo.about_general}
                     </span>
                   </p>
                 </div>
@@ -74,7 +99,7 @@ export const PerfilContratante = () => {
                 <div className="about h-12">
                   <p className='ml-0 mt-2 text-xs text-white font-medium'>
                     <span>
-                      trajetoria
+                      {userInfo.about_looking}
                     </span>
                   </p>
                 </div>
@@ -90,7 +115,7 @@ export const PerfilContratante = () => {
                 <div className="about h-12">
                   <p className='ml-0 mt-2 text-xs text-white font-medium'>
                     <span>
-                      O que
+                      {userInfo.about_expectation}
                     </span>
                   </p>
                 </div>
@@ -104,16 +129,16 @@ export const PerfilContratante = () => {
                   <PencilSimple size={18} color='white' className='cursor-pointer mt-4' />
                 </div>
                 <div className="contacts-info flex flex-col">
-                  <a href="#" className='no-underline text-white pt-3 text-sm'>Fulano@gmail.com</a>
-                  <a href="#" className='no-underline text-white pt-3 text-sm'>13 99999-9999</a>
+                  <a href="#" className='no-underline text-white pt-3 text-sm'>{userInfo.email}</a>
+                  <a href="#" className='no-underline text-white pt-3 text-sm'>{userInfo.phone_number}</a>
                 </div>
               </div>
               <div className="social pl-6 pr-6 pt-7">
                 <h2 className='text-white text-base font-bold flex justify-center'>redes sociais</h2>
                 <div className="socials flex items-center justify-around pt-4">
-                  <a href="#"><InstagramLogo size={22} color='white' className='cursor-pointer' /></a>
-                  <a href="#"><LinkedinLogo size={22} color='white' className='cursor-pointer' /></a>
-                  <a href="#"><TwitterLogo size={22} color='white' className='cursor-pointer' /></a>
+                  <a href={userInfo.instagram_link}><InstagramLogo size={22} color='white' className='cursor-pointer' /></a>
+                  <a href={userInfo.linkedin_link}><LinkedinLogo size={22} color='white' className='cursor-pointer' /></a>
+                  <a href={userInfo.twitter_link}><TwitterLogo size={22} color='white' className='cursor-pointer' /></a>
                 </div>
               </div>
               <div className="button flex justify-center pt-8 pb-6">

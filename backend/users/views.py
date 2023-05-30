@@ -1,9 +1,21 @@
 from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import CustomUser
 from .serializers import UserSerializer, serializers
+
+
+class UserInfoView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        # Uso do serializer personalizado para o usuário
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
 
 
 class UserListCreateAPIView(generics.CreateAPIView):

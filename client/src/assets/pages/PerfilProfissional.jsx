@@ -1,12 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MainHeader } from '../components/MainHeader'
 import { Link } from 'react-router-dom'
 import { Star, ChatTeardropText, PencilSimple, InstagramLogo, LinkedinLogo, TwitterLogo } from '@phosphor-icons/react'
 import { AboutUser } from '../components/AboutUser'
 import { ProfissionaHistory } from '../components/ProfissionaHistory'
+import axios from 'axios'
 
 export const PerfilProfissional = () => {
+  const [userInfo, setUserInfo] = useState(null);
 
+  useEffect(() => {
+    const authToken = sessionStorage.getItem('token');
+    
+    axios.get('http://127.0.0.1:8000/user-info/', {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    })
+      .then(response => {
+        const userData = response.data;
+        setUserInfo(userData);
+      })
+      .catch(error => {
+        console.log('erro');
+      });
+  }, []);
+
+  if (!userInfo) {
+    return <div>Carregando...</div>;
+  }
+
+
+
+  
+  /*
   const [modoEdicao, setModoEdicao] = useState(false);
   const [sobre, setSobre] = useState('algo sobre o user'); // Substitua pelo valor inicial real
 
@@ -25,7 +52,7 @@ export const PerfilProfissional = () => {
   const handleSobreChange = (event) => {
     setSobre(event.target.value);
   };
-
+  */
 
   return (
     <div>
@@ -48,8 +75,8 @@ export const PerfilProfissional = () => {
                 <div className="profile-image w-24 h-24 ml-7 mt-7 bg-EsmeraldGreen rounded-full"></div>
                 <div className='flex justify-between w-full pr-24 pb-6'>
                   <div className="profile-information">
-                    <h2 className='text-white text-3xl mt-8 ml-7'><span>nome do usuario</span></h2>
-                    <p className='text-white font-bold text-sm ml-7 pt-1'><span>profissao do user</span></p>
+                    <h2 className='text-white text-3xl mt-8 ml-7'><span>{userInfo.name}</span></h2>
+                    <p className='text-white font-bold text-sm ml-7 pt-1'><span>{userInfo.occupation}</span></p>
                     <div className="rating ml-7 mt-2 flex">
                       <Star size={18} color='white' />
                       <Star size={18} color='white' />
@@ -66,7 +93,7 @@ export const PerfilProfissional = () => {
                     <div className="hour-price text-right pr-4">
                       <span className='text-white text-sm mt-2 font-normal'>preço por hora:</span><br />
                       <div className="price">
-                        <span className='text-white text-sm mt-2 font-normal'>BRL <span>00.0</span></span>
+                        <span className='text-white text-sm mt-2 font-normal'>{userInfo.currency} <span>{userInfo.currency_amount}</span></span>
                       </div>
                     </div>
                   </div>
@@ -87,16 +114,16 @@ export const PerfilProfissional = () => {
                   <PencilSimple size={18} color='white' className='cursor-pointer mt-4' />
                 </div>
                 <div className="contacts-info flex flex-col">
-                  <a href="#" className='no-underline text-white pt-3 text-sm'>Fulano@gmail.com</a>
-                  <a href="#" className='no-underline text-white pt-3 text-sm'>13 99999-9999</a>
+                  <a href="#" className='no-underline text-white pt-3 text-sm'>{userInfo.email}</a>
+                  <a href="#" className='no-underline text-white pt-3 text-sm'>{userInfo.phone_number}</a>
                 </div>
               </div>
               <div className="social pl-6 pr-6 pt-7">
                 <h2 className='text-white text-base font-bold flex justify-center'>redes sociais</h2>
                 <div className="socials flex items-center justify-around pt-4">
-                  <a href="#"><InstagramLogo size={22} color='white' className='cursor-pointer' /></a>
-                  <a href="#"><LinkedinLogo size={22} color='white' className='cursor-pointer' /></a>
-                  <a href="#"><TwitterLogo size={22} color='white' className='cursor-pointer' /></a>
+                  <a href={userInfo.instagram_link}><InstagramLogo size={22} color='white' className='cursor-pointer' /></a>
+                  <a href={userInfo.linkedin_link}><LinkedinLogo size={22} color='white' className='cursor-pointer' /></a>
+                  <a href={userInfo.twitter_link}><TwitterLogo size={22} color='white' className='cursor-pointer' /></a>
                 </div>
               </div>
               <div className="button flex justify-center pt-8 pb-6">
