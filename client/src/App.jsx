@@ -9,15 +9,18 @@ import { useEffect } from "react"
 
 
 function App() {
-
   const authenticated = sessionStorage.getItem('token')
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!authenticated) {
+  useEffect(() => handleAuth(), [authenticated, navigate]);
+
+  const handleAuth = () => 
+  {
+    if (!authenticated && window.location.pathname !== '/register') 
       navigate('/login');
-    }
-  }, [authenticated, navigate]);
+    else if(window.location.pathname === '/login') 
+      navigate('/');  
+  };
 
   return (
     <Routes>
@@ -28,7 +31,7 @@ function App() {
       {authenticated ? <Route path="/perfilprofissional" element={<PerfilProfissional />} /> : null}
       {authenticated ? <Route path="/perfilcontratante" element={<PerfilContratante />} /> : null}
       {authenticated ? <Route path="/encontrarprofissionais" element={<EncontrarProfissionais />} /> : null}
-
+      
     </Routes>
   );
 }
