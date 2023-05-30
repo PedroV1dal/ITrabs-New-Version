@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChatCenteredDots, Bell } from '@phosphor-icons/react';
 
 export const MainHeader = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('token');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,7 +72,24 @@ export const MainHeader = () => {
           <div className="header-right list-none flex items-center">
             <Bell size={45} color={isScrolled ? 'white' : 'Purple'} className="p-2" />
             <ChatCenteredDots size={45} color={isScrolled ? 'white' : 'Purple'} className="pr-4" />
-            <div className="image-profile bg-EsmeraldGreen w-10 h-10 rounded-full"></div>
+
+            <div>
+              <div
+                className="image-profile bg-EsmeraldGreen w-10 h-10 rounded-full"
+                onClick={toggleDropdown}
+              ></div>
+              {showDropdown && (
+                <div className="dropdown-content absolute top-0 mt-20 right-0 mr-28 bg-Purple rounded-md p-2">
+                  <button
+                    type='button'
+                    className="dropdown-item text-white cursor-pointer hover:bg-PurpleLight"
+                    onClick={navigate('/login')}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
