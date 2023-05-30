@@ -11,8 +11,6 @@ export const AboutUser = () => {
   };
 
   const salvarSobre = () => {
-    // Lógica para salvar o novo valor de 'sobre' no backend
-    // ...
 
     setModoEdicao(false);
     console.log('Alterações salvas com sucesso');

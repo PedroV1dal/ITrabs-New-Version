@@ -4,15 +4,12 @@ import { ChatCenteredDots, Bell } from '@phosphor-icons/react';
 
 export const MainHeader = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
 
   const handleLogout = () => {
     sessionStorage.removeItem('token');
+    navigate('/login')
   };
 
   useEffect(() => {
@@ -74,22 +71,15 @@ export const MainHeader = () => {
             <ChatCenteredDots size={45} color={isScrolled ? 'white' : 'Purple'} className="pr-4" />
 
             <div>
-              <div
-                className="image-profile bg-EsmeraldGreen w-10 h-10 rounded-full"
-                onClick={toggleDropdown}
-              ></div>
-              {showDropdown && (
-                <div className="dropdown-content absolute top-0 mt-20 right-0 mr-28 bg-Purple rounded-md p-2">
-                  <button
-                    type='button'
-                    className="dropdown-item text-white cursor-pointer hover:bg-PurpleLight"
-                    onClick={navigate('/login')}
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
+              <button
+                type='button'
+                className={`image-profil rounded-md p-2  ${isScrolled ? 'bg-white text-Purple' : 'bg-Purple text-white'}`}
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
             </div>
+
           </div>
         </div>
       </div>
