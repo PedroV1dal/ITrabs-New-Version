@@ -106,7 +106,7 @@ export const PerfilProfissional = () => {
                       <Star size={18} color='white' />
                     </div>
                   </div>
-                  <PencilSimple size={22} className='mt-10 text-white' onClick={handleModalOpen} />
+                  {/* <PencilSimple size={22} className='mt-10 text-white' onClick={handleModalOpen} /> */}
                   <div className="btn-message">
                     <button className='bg-EsmeraldGreen text-white p-2 rounded-xl border-none mt-9 ml-36 w-36 flex items-center'>
                       <ChatTeardropText size={19} className='mr-3 ml-1' />
