@@ -12,9 +12,3 @@ class Advertisement(models.Model):
 
     def get_user_name(self):
         return self.user.name
-
-
-class Rating(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE)
-    rating = models.DecimalField(max_digits=3, decimal_places=1)
