@@ -1,60 +1,40 @@
-import React, { useState } from 'react'
-import { PencilSimple } from '@phosphor-icons/react';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 
 export const AboutUser = () => {
 
-  const [modoEdicao, setModoEdicao] = useState(false);
-  const [sobre, setSobre] = useState('algo sobre o user'); // Substitua pelo valor inicial real
+  const authToken = sessionStorage.getItem('token');
+  const [userInfo, setUserInfo] = useState(null);
 
-  const alternarModoEdicao = () => {
-    setModoEdicao(!modoEdicao);
-  };
+  useEffect(() => {
+    const authToken = sessionStorage.getItem('token');
 
-  const salvarSobre = () => {
+    axios.get('http://127.0.0.1:8000/user-info/', {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    })
+      .then(response => {
+        const userData = response.data;
+        setUserInfo(userData);
+      })
+      .catch(error => {
+        console.log('erro');
+      });
+  }, []);
 
-    setModoEdicao(false);
-    console.log('Alterações salvas com sucesso');
-  };
-
-  const handleSobreChange = (event) => {
-    setSobre(event.target.value);
-  };
+  if (!userInfo) {
+    return <div>Carregando...</div>;
+  }
 
 
 
   return (
     <div className="about-box box max-w-3xl m-auto pt-7">
-      <div className="box-label flex justify-between items-center">
-        <h3 className='text-base text-white'>sobre</h3>
-        {modoEdicao ? (
-          <button
-            className="cursor-pointer text-white"
-            onClick={salvarSobre}
-          >
-            Salvar
-          </button>
-        ) : (
-          <PencilSimple
-            size={18}
-            color='white'
-            className='cursor-pointer'
-            onClick={alternarModoEdicao}
-          />
-        )}
-      </div>
-      <div className="about h-12">
-        {modoEdicao ? (
-          <textarea
-            value={sobre}
-            onChange={handleSobreChange}
-            className="ml-0 mt-2 p-1 w-full text-xs text-Purple font-medium bg-white resize-none "
-          />
-        ) : (
-          <p className='ml-0 mt-2 text-xs text-white font-medium'>
-            {sobre}
-          </p>
-        )}
-      </div>
+
+      <h3 className=' text-white text-lg font-bold'>sobre</h3>
+      <p className='text-white text-sm mt-1'>{userInfo.about_professional}</p>
+
     </div>
   )
 }

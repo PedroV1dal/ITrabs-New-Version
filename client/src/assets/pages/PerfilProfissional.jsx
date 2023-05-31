@@ -42,6 +42,10 @@ export const PerfilProfissional = () => {
     }
   })
 
+  const editarPerfil = (() => {
+    navigate('/editarperfil')
+  })
+
   return (
     <div>
       <MainHeader />
@@ -57,7 +61,6 @@ export const PerfilProfissional = () => {
       <section className='profile-info flex justify-center items-center pt-12 pb-12'>
         <div className="container max-w-7xl">
           <div className="info-division flex">
-
             <div className="left-info flex-1 bg-Purple rounded-lg">
               <div className="row flex">
                 <div className="profile-image w-24 h-24 ml-7 mt-7 bg-EsmeraldGreen rounded-full"></div>
@@ -78,9 +81,8 @@ export const PerfilProfissional = () => {
                     <button onClick={criarAnuncio} className='bg-EsmeraldGreen text-white p-2 rounded-xl border-none mt-4 mb-2 ml-36 w-36 flex items-center justify-center'>
                       <p>Criar Anúncio</p>
                     </button>
-                    <button className='bg-EsmeraldGreen text-white p-2 rounded-xl border-none ml-36 w-36 flex items-center'>
-                      <ChatTeardropText size={19} className='mr-3 ml-1' />
-                      <p>Conversar</p>
+                    <button onClick={editarPerfil} className='bg-EsmeraldGreen text-white p-2 rounded-xl border-none mt-4 mb-2 ml-36 w-36 flex items-center justify-center'>
+                      <p>Editar Perfil</p>
                     </button>
                     <div className="hour-price text-right pr-4">
                       <span className='text-white text-sm mt-2 font-normal'>preço por hora:</span><br />
