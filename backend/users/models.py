@@ -1,7 +1,5 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
-from multiselectfield import MultiSelectField
-
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -25,11 +23,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ('gold', 'Gold'),
         ('platinum', 'Platinum')
     )
-    LANGUAGE_CHOICES = (
-        ('Português', 'Português'),
-        ('Inglês', 'Inglês'),
-        ('Espanhol', 'Espanhol'),
-    )
     CATEGORY_CHOICES = (
         ('Não especificado', 'Não especificado'),
         ('Serviços Domésticos', 'Serviços Domésticos'),
@@ -47,7 +40,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ('EUR', 'EUR'),
         ('GBP', 'GBP'),
     )
-
     name = models.CharField('Name', max_length=300, blank=True)
     email = models.EmailField(unique=True)
     phone_number = models.CharField(
@@ -68,15 +60,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         'Descrição do Anúncio:', max_length=300, blank=True)
     category = models.CharField(
         'Categoria', choices=CATEGORY_CHOICES, max_length=30, default='Não especificado')
-    availability = models.TextField(
-        'Disponibilidade', max_length=70, blank=True)
     currency = models.CharField(
         'Moeda', max_length=3, choices=CURRENCY_CHOICES, default='BRL')
     currency_amount = models.DecimalField(
         'Preço por hora', max_digits=10, decimal_places=2, default=0)
-
-    languages = MultiSelectField(
-        'Idiomas', max_length=30, choices=LANGUAGE_CHOICES, default='Português')
 
     instagram_link = models.URLField('Instagram link', max_length=200, blank=True)
     twitter_link = models.URLField('Twitter link', max_length=200, blank=True)

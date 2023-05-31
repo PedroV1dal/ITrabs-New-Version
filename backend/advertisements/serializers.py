@@ -5,11 +5,13 @@ from django.db.models import Avg
 
 class AdvertisementSerializer(serializers.ModelSerializer):
     average_rating = serializers.SerializerMethodField()
+    user_name = serializers.CharField(source='get_user_name', read_only=True)
 
     class Meta:
         model = Advertisement
         fields = ['id', 'description', 'category',
-                  'price', 'created_at', 'average_rating']
+                  'price', 'availability', 'created_at', 
+                  'average_rating', 'user_name']
 
     def get_average_rating(self, obj):
         average_rating = Rating.objects.filter(

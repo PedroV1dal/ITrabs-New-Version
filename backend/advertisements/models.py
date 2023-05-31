@@ -11,10 +11,7 @@ class Advertisement(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def get_user_name(self):
-        return self.user.name()
-
-    def get_user_idiomas(self):
-        return self.user.idiomas.all()
+        return self.user.name
 
 
 class Rating(models.Model):
