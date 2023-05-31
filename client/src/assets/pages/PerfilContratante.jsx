@@ -56,10 +56,7 @@ export const PerfilContratante = () => {
                     </div>
                     <div className="rating ml-7 mt-2 flex">
                       <Star size={18} color='white' />
-                      <Star size={18} color='white' />
-                      <Star size={18} color='white' />
-                      <Star size={18} color='white' />
-                      <Star size={18} color='white' />
+                      {userInfo.average_rating}
                     </div>
                   </div>
                   <div className="btn-message">

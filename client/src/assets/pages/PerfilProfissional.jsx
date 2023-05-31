@@ -70,10 +70,7 @@ export const PerfilProfissional = () => {
                     <p className='text-white font-bold text-sm ml-7 pt-1'><span>{userInfo.occupation}</span></p>
                     <div className="rating ml-7 mt-2 flex">
                       <Star size={18} color='white' />
-                      <Star size={18} color='white' />
-                      <Star size={18} color='white' />
-                      <Star size={18} color='white' />
-                      <Star size={18} color='white' />
+                      {userInfo.average_rating}
                     </div>
                   </div>
                   {/* <PencilSimple size={22} className='mt-10 text-white' onClick={handleModalOpen} /> */}

@@ -12,3 +12,6 @@ class Advertisement(models.Model):
 
     def get_user_name(self):
         return self.user.name
+
+    def get_average_rating(self):
+        return self.user.average_rating

@@ -44,6 +44,7 @@ export const ProfileCard = () => {
                     <Star size={18} className="text-white" />
                     <Star size={18} className="text-white" />
                     <Star size={18} className="text-white" />
+                    {ad.average_rating}
                   </div>
                   <p className="font-bold text-white text-xs">publicado em: {formattedDate}</p>
                 </div>

@@ -1,6 +1,7 @@
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -86,3 +87,26 @@ class TokenObtainPairSerializer(TokenObtainPairSerializer):
 
 class RefreshTokenView(TokenRefreshView):
     pass
+
+
+    
+@api_view(['POST'])
+def rate_user(request, pk):
+    try:
+        user = CustomUser.objects.get(pk=pk)
+    except CustomUser.DoesNotExist:
+        return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    if user == request.user:
+        return Response({'error': 'You cannot vote for yourself.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    rating = request.data.get('rating')
+    if rating is None or not isinstance(rating, (int, float)) or rating < 0 or rating > 5:
+        return Response({'error': 'Invalid rating. Rating should be a number between 0 and 5.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    user.total_rating += rating
+    user.num_ratings += 1
+    user.average_rating = user.total_rating / user.num_ratings
+    user.save()
+
+    return Response({'success': 'Vote recorded.'}, status=status.HTTP_201_CREATED)

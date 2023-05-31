@@ -7,7 +7,8 @@ from .views import (
     UserRetrieveUpdateAPIView,
     ObtainTokenPairView, 
     RefreshTokenView,
-    UserDeleteAPIView
+    UserDeleteAPIView,
+    rate_user
 )
 
 app_name = 'users'
@@ -20,5 +21,6 @@ urlpatterns = [
     path('users/<int:pk>/update/', UserRetrieveUpdateAPIView.as_view(), name='user-retrieve-update'),
     path('users/<int:pk>/delete/', UserDeleteAPIView.as_view(), name='user-delete'),
     path('token/', ObtainTokenPairView.as_view(), name='token-obtain-pair'),
-    path('token/refresh/', RefreshTokenView.as_view(), name='token-refresh')
+    path('token/refresh/', RefreshTokenView.as_view(), name='token-refresh'),
+    path('users/<int:pk>/rate/', rate_user, name='rate_user')
 ]

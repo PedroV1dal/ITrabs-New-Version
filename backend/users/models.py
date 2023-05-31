@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -65,9 +67,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     currency_amount = models.DecimalField(
         'Preço por hora', max_digits=10, decimal_places=2, default=0)
 
-    instagram_link = models.URLField('Instagram link', max_length=200, blank=True)
+    instagram_link = models.URLField(
+        'Instagram link', max_length=200, blank=True)
     twitter_link = models.URLField('Twitter link', max_length=200, blank=True)
-    linkedin_link = models.URLField('LinkedIn link', max_length=200, blank=True)
+    linkedin_link = models.URLField(
+        'LinkedIn link', max_length=200, blank=True)
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -94,5 +98,16 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         related_query_name='customuser'
     )
 
-    def __str__(self):
-        return self.email
+    total_rating = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    num_ratings = models.PositiveIntegerField(default=0)
+    average_rating = models.DecimalField(max_digits=3, decimal_places=1, default=0)
+
+    def update_rating(self):
+        ratings = self.ratings.values_list('rating', flat=True)
+        count = ratings.count()
+        if count > 0:
+            total_rating = sum(ratings)
+            self.rating = total_rating / count
+        else:
+            self.rating = 0.0
+        self.save()
