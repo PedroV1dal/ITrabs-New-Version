@@ -30,8 +30,8 @@ export const ProfileCard = () => {
         });
 
         return (
-          <div key={ad.id} className="profile-card flex p-8 rounded-2xl bg-Purple">
-            <div className="left-info-profile flex flex-col justify-between mr-8">
+          <div key={ad.id} className="profile-card flex p-8 rounded-2xl bg-Purple mb-5">
+            <div className="left-info-profile flex flex-col justify-between flex-1">
               <div className="user-info flex items-center gap-4">
                 <div className="icon-container w-14 h-14 rounded-full bg-EsmeraldGreen"></div>
                 <div>
@@ -54,7 +54,7 @@ export const ProfileCard = () => {
                 <strong className="font-bold text-white text-xs">Disponibilidade: {ad.availability}</strong>
               </footer>
             </div>
-            <div className="right-info-profile flex flex-col justify-between w-11/12">
+            <div className="right-info-profile flex flex-col justify-between ">
               <div className="price">
                 <h3 className="font-bold text-white text-base uppercase">Preço por hora</h3>
                 <strong className="font-medium text-white text-base">BRL {ad.price}</strong>

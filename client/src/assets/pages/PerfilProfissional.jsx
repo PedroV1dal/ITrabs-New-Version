@@ -4,55 +4,14 @@ import { Link } from 'react-router-dom'
 import { Star, ChatTeardropText, PencilSimple, InstagramLogo, LinkedinLogo, TwitterLogo } from '@phosphor-icons/react'
 import { AboutUser } from '../components/AboutUser'
 import { ProfissionaHistory } from '../components/ProfissionaHistory'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 export const PerfilProfissional = () => {
   const [userInfo, setUserInfo] = useState(null);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const authToken = sessionStorage.getItem('token');
 
-  // const handleModalOpen = () => {
-  //   setIsModalOpen(true);
-  // };
-
-  // const [name, setName] = useState()
-  // const [email, setEmail] = useState()
-  // const [phone_number, setPhoneNumber] = useState()
-  // const [about_general, setAboutGeneral] = useState()
-  // const [about_professional, setAboutProfessional] = useState()
-  // const [about_expectation, setAboutExpectation] = useState()
-  // const [about_looking, setAboutLookin] = useState()
-  // const [professional_history, setProfessionalHistory] = useState()
-  // // const [name, setName] = useState()
-  // // const [name, setName] = useState()
-  // // const [name, setName] = useState()
-  // // const [name, setName] = useState()
-  // // const [name, setName] = useState()
-  // // const [name, setName] = useState()
-  // // const [name, setName] = useState()
-  // // const [name, setName] = useState()
-  // // const [name, setName] = useState()
-  // // const [name, setName] = useState()
-
-  // const userInfos = {
-  //   name: name,
-  //   email: email,
-  //   phone_number: phone_number,
-  //   about_general: about_general,
-  //   about_looking: about_looking,
-  //   about_expectation: about_expectation,
-  //   // occupation: occupation,
-  //   professional_history: professional_history,
-  //   about_professional: about_professional,
-  //   // about_advertisement: about_advertisement,
-  //   // category: category,
-  //   // availability: uavailability,
-  //   // currency: currency,
-  //   // currency_amount: currency_amount,
-  //   // languages: languages,
-  //   // instagram_link: instagram_link,
-  //   // twitter_link: twitter_link,
-  //   // linkedin_link: linkedin_link,
-  // };
 
   useEffect(() => {
     const authToken = sessionStorage.getItem('token');
@@ -74,6 +33,14 @@ export const PerfilProfissional = () => {
   if (!userInfo) {
     return <div>Carregando...</div>;
   }
+
+  const criarAnuncio = (() => {
+    if (authToken) {
+      navigate('/criaranuncio')
+    } else {
+      alert("NÃO!")
+    }
+  })
 
   return (
     <div>
@@ -108,7 +75,10 @@ export const PerfilProfissional = () => {
                   </div>
                   {/* <PencilSimple size={22} className='mt-10 text-white' onClick={handleModalOpen} /> */}
                   <div className="btn-message">
-                    <button className='bg-EsmeraldGreen text-white p-2 rounded-xl border-none mt-9 ml-36 w-36 flex items-center'>
+                    <button onClick={criarAnuncio} className='bg-EsmeraldGreen text-white p-2 rounded-xl border-none mt-4 mb-2 ml-36 w-36 flex items-center justify-center'>
+                      <p>Criar Anúncio</p>
+                    </button>
+                    <button className='bg-EsmeraldGreen text-white p-2 rounded-xl border-none ml-36 w-36 flex items-center'>
                       <ChatTeardropText size={19} className='mr-3 ml-1' />
                       <p>Conversar</p>
                     </button>

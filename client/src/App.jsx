@@ -6,6 +6,8 @@ import { Register } from "./assets/pages/Register"
 import { Routes, Route, useNavigate } from "react-router-dom"
 import { EncontrarProfissionais } from "./assets/pages/EncontrarProfissionais"
 import { useEffect } from "react"
+import AddCreate from "./assets/pages/AddCreate"
+
 
 
 function App() {
@@ -26,10 +28,12 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      {/* <Route path="/criaranuncio" element={<AddCreate />} /> */}
 
       {authenticated ? <Route path="/perfilprofissional" element={<PerfilProfissional />} /> : null}
       {authenticated ? <Route path="/perfilcontratante" element={<PerfilContratante />} /> : null}
       {authenticated ? <Route path="/encontrarprofissionais" element={<EncontrarProfissionais />} /> : null}
+      {authenticated ? <Route path="/criaranuncio" element={<AddCreate />} /> : null}
 
     </Routes>
   );
