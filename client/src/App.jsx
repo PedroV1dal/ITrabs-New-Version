@@ -8,6 +8,7 @@ import { EncontrarProfissionais } from "./assets/pages/EncontrarProfissionais"
 import { useEffect } from "react"
 import AddCreate from "./assets/pages/AddCreate"
 import { ProProfileEdit } from "./assets/pages/ProProfileEdit"
+import { ClienteProfileEdit } from "./assets/pages/ClienteProfileEdit"
 
 
 
@@ -36,6 +37,7 @@ function App() {
       {authenticated ? <Route path="/encontrarprofissionais" element={<EncontrarProfissionais />} /> : null}
       {authenticated ? <Route path="/criaranuncio" element={<AddCreate />} /> : null}
       {authenticated ? <Route path="/editarperfil" element={<ProProfileEdit />} /> : null}
+      {authenticated ? <Route path="//clientperfil" element={<ClienteProfileEdit />} /> : null}
 
     </Routes>
   );

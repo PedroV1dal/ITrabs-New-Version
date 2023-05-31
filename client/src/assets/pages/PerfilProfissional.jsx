@@ -63,7 +63,8 @@ export const PerfilProfissional = () => {
           <div className="info-division flex">
             <div className="left-info flex-1 bg-Purple rounded-lg">
               <div className="row flex">
-                <div className="profile-image w-24 h-24 ml-7 mt-7 bg-EsmeraldGreen rounded-full"></div>
+                <img src="https://picsum.photos/90/90" className='w-24 h-24 ml-7 mt-7 bg-EsmeraldGreen rounded-full' />
+                {/* <div className="profile-image w-24 h-24 ml-7 mt-7 bg-EsmeraldGreen rounded-full"></div> */}
                 <div className='flex justify-between w-full pr-24 pb-6'>
                   <div className="profile-information">
                     <h2 className='text-white text-3xl mt-8 ml-7'><span>{userInfo.name}</span></h2>

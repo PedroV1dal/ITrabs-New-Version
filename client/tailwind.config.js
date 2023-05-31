@@ -15,6 +15,7 @@ export default {
       width: {
         600: '37.5rem',
         30: '30%',
+        40: '40%',
       },
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif'],

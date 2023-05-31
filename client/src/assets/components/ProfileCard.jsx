@@ -33,7 +33,8 @@ export const ProfileCard = () => {
           <div key={ad.id} className="profile-card flex p-8 rounded-2xl bg-Purple mb-5">
             <div className="left-info-profile flex flex-col justify-between flex-1">
               <div className="user-info flex items-center gap-4">
-                <div className="icon-container w-14 h-14 rounded-full bg-EsmeraldGreen"></div>
+                {/* <div className="icon-container w-14 h-14 rounded-full bg-EsmeraldGreen"></div> */}
+                <img src="https://picsum.photos/70/70" className='rounded-full' />
                 <div>
                   <h2 className="font-bold text-white text-2xl">
                     {ad.user_name || 'Nome indisponível'}

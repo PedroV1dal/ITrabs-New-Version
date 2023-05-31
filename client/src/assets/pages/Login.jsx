@@ -30,7 +30,7 @@ export const Login = () => {
         alert('Bem-Vindo');
         setEmail('');
         setPassword('');
-        navigate('/perfilprofissional');
+        navigate('/editarperfil');
       })
       .catch((error) => {
         alert('Erro ao fazer login.');

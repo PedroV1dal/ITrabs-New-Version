@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { MainHeader } from '../components/MainHeader'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Star, ChatTeardropText, PencilSimple, InstagramLogo, LinkedinLogo, TwitterLogo } from '@phosphor-icons/react'
 import axios from 'axios'
 
 export const PerfilContratante = () => {
   const [userInfo, setUserInfo] = useState(null);
 
+  const navigate = useNavigate();
+
+  const editarPerfil = (() => {
+    navigate('/clientperfil')
+  })
+
   useEffect(() => {
     const authToken = sessionStorage.getItem('token');
-    
+
     axios.get('http://127.0.0.1:8000/user-info/', {
       headers: {
         Authorization: `Bearer ${authToken}`,
@@ -45,9 +51,10 @@ export const PerfilContratante = () => {
         <div className="container max-w-7xl">
           <div className="info-division flex">
 
-            <div className="left-info flex-1 bg-Purple rounded-lg">
+            <div className="left-info flex-1 bg-Purple rounded-lg pb-11">
               <div className="row flex">
-                <div className="profile-image w-24 h-24 ml-7 mt-7 bg-EsmeraldGreen rounded-full"></div>
+                <img src="https://picsum.photos/90/90" className='w-24 h-24 ml-7 mt-7 bg-EsmeraldGreen rounded-full' />
+                {/* <div className="profile-image w-24 h-24 ml-7 mt-7 bg-EsmeraldGreen rounded-full"></div> */}
                 <div className='flex justify-between w-full pr-24 pb-6'>
                   <div className="profile-information">
                     <div className='flex items-center'>
@@ -60,9 +67,8 @@ export const PerfilContratante = () => {
                     </div>
                   </div>
                   <div className="btn-message">
-                    <button className='bg-EsmeraldGreen text-white p-2 rounded-xl border-none mt-9 ml-36 w-36 flex items-center'>
-                      <ChatTeardropText size={19} className='mr-3 ml-1' />
-                      <p>Conversar</p>
+                    <button onClick={editarPerfil} className='bg-EsmeraldGreen text-white p-2 rounded-xl border-none mt-4 mb-2 ml-36 w-36 flex items-center justify-center'>
+                      <p>Editar Perfil</p>
                     </button>
                   </div>
                 </div>
@@ -110,10 +116,10 @@ export const PerfilContratante = () => {
                   </div>
                 </span>
                 <div className="about h-12">
-                  <p className='ml-0 mt-2 text-xs text-white font-medium'>
-                    <span>
-                      {userInfo.about_expectation}
-                    </span>
+                  <p className='ml-0 mt-2 text-xs text-white font-medium mb-11'>
+
+                    {userInfo.about_expectation}
+
                   </p>
                 </div>
               </div>
