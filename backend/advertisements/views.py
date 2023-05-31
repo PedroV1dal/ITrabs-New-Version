@@ -35,7 +35,7 @@ class AdvertisementSearchAPIView(generics.ListAPIView):
     serializer_class = AdvertisementSerializer
 
     def get_queryset(self):
-        search_query = self.request.query_params.get('search', '')
+        search_query = self.request.query_params.get('query', '')
         if search_query:
             queryset = Advertisement.objects.filter(
                 Q(description__icontains=search_query) |
