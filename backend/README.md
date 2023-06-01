@@ -1,3 +1,7 @@
+## O que esse projeto tem a oferecer?
+Esse projeto em Django oferece um sistema de CRUD de usuário e de anúncios, utilizando o rest_framework, trabalhando em conjunto com o front-end.
+
+
 ## Configuração
 
 1. Clone este repositório em sua máquina local.
