@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const ProfileCard = () => {
   const [advertisements, setAdvertisements] = useState([]);
-
+  const key = 'chave';
   useEffect(() => {
     axios
       .get('http://127.0.0.1:8000/advertisements/')
@@ -17,6 +17,20 @@ export const ProfileCard = () => {
       });
   }, []);
 
+  const handleLocationClick = (address) => {
+    axios
+      .get(`https://api.opencagedata.com/geocode/v1/json?q=${address}&key=${key}`)
+      .then(response => {
+        const openStreetMapUrl = response.data?.results[0]?.annotations?.OSM?.url;
+        if (openStreetMapUrl) {
+          window.open(openStreetMapUrl, '_blank');
+        }
+      })
+      .catch(error => {
+        console.log('erro', error);
+      });
+  };
+
   return (
     <div>
       {advertisements.map(ad => {
@@ -28,6 +42,8 @@ export const ProfileCard = () => {
           hour: '2-digit',
           minute: '2-digit',
         });
+        // Verifica se o campo address está vazio
+        const hasAddress = ad.address && ad.address.length > 0;
 
         return (
           <div key={ad.id} className="profile-card flex p-8 rounded-2xl bg-Purple mb-5">
@@ -74,6 +90,15 @@ export const ProfileCard = () => {
                 >
                   Chat de venda
                 </button>
+                {hasAddress && (
+                <button
+                  className="w-full px-6 py-3 flex items-center justify-center font-medium text-white text-sm bg-EsmeraldGreen rounded-full hover:bg-white hover:text-EsmeraldGreen"
+                  type="button"
+                  onClick={() => handleLocationClick(ad.address)}
+                >
+                  Localização
+                </button>
+                )}
               </div>
             </div>
           </div>

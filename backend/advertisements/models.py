@@ -9,6 +9,7 @@ class Advertisement(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     availability = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
+    address = models.CharField(max_length=100, blank=True)
 
     def get_user_name(self):
         return self.user.name

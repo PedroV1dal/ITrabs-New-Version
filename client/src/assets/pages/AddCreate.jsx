@@ -7,6 +7,7 @@ export default function AddCreate() {
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
   const [availability, setAvailability] = useState('');
+  const [address, setAddress] = useState('');
 
   const navigate = useNavigate();
 
@@ -22,6 +23,7 @@ export default function AddCreate() {
       category: category,
       price: parseFloat(price),
       availability: availability,
+      address: address,
     };
 
     const authToken = sessionStorage.getItem('token');
@@ -38,6 +40,7 @@ export default function AddCreate() {
         setCategory('');
         setPrice('');
         setAvailability('');
+        setAddress('');
         navigate('/perfilprofissional');
       })
       .catch((error) => {
@@ -109,6 +112,21 @@ export default function AddCreate() {
               placeholder="Digite a disponibilidade"
               value={availability}
               onChange={(e) => setAvailability(e.target.value)}
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="address" className="block text-gray-700 font-bold mb-2">
+              Endereço:
+            </label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              placeholder="Digite o endereço"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>

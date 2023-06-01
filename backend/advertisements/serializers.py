@@ -11,5 +11,5 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         model = Advertisement
         fields = ['id', 'description', 'category',
                   'price', 'availability', 'created_at',
-                  'user_name', 'average_rating']
+                  'user_name', 'average_rating', 'address']
 
